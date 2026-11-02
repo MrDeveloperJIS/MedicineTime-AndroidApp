@@ -5,4 +5,61 @@
     <string name="nav_settings">সেটিংস</string>
 
     <string name="coming_soon">শীঘ্রই আসছে</string>
+
+    <!-- Common -->
+    <string name="back">পিছনে</string>
+    <string name="edit">সম্পাদনা</string>
+    <string name="delete">মুছুন</string>
+    <string name="cancel">বাতিল</string>
+    <string name="save">সংরক্ষণ</string>
+    <string name="ok">ঠিক আছে</string>
+
+    <!-- Profiles -->
+    <string name="profiles_title">প্রোফাইল</string>
+    <string name="manage_profiles">প্রোফাইল পরিচালনা</string>
+    <string name="add_profile">প্রোফাইল যোগ করুন</string>
+    <string name="edit_profile">প্রোফাইল সম্পাদনা</string>
+    <string name="current_profile">বর্তমান</string>
+    <string name="profile_name">নাম</string>
+    <string name="profile_color">রঙ</string>
+    <string name="meal_times">খাবারের সময়</string>
+    <string name="delete_profile_title">প্রোফাইল মুছবেন?</string>
+    <string name="delete_profile_message">%1$s এবং তার সব ওষুধ এই ফোন থেকে মুছে যাবে।</string>
+    <string name="first_profile_title">মেডিসিন টাইমে স্বাগতম</string>
+    <string name="first_profile_subtitle">শুরু করতে একটি প্রোফাইল তৈরি করুন। পরে পরিবারের অন্য সদস্যদের যোগ করতে পারবেন।</string>
+    <string name="create_profile">প্রোফাইল তৈরি করুন</string>
+
+    <!-- Meals -->
+    <string name="meal_breakfast">সকালের নাস্তা</string>
+    <string name="meal_lunch">দুপুরের খাবার</string>
+    <string name="meal_snacks">বিকেলের নাস্তা</string>
+    <string name="meal_dinner">রাতের খাবার</string>
+
+    <!-- Medicines -->
+    <string name="add_medicine">ওষুধ যোগ করুন</string>
+    <string name="medicines_empty">এখনও কোনো ওষুধ নেই</string>
+    <string name="medicines_empty_hint">প্রথম ওষুধ যোগ করতে ওষুধ যোগ করুন বোতামে চাপুন।</string>
+    <string name="as_needed">প্রয়োজন হলে</string>
+    <string name="no_schedule">কোনো সময়সূচি নেই</string>
+    <string name="schedule_daily">প্রতিদিন</string>
+    <string name="schedule_weekdays">নির্দিষ্ট দিন</string>
+    <string name="schedule_every_n">প্রতি %1$d দিন</string>
+    <string name="stock_left">মজুত: %1$s</string>
+
+    <plurals name="times_count">
+        <item quantity="one">%d বার</item>
+        <item quantity="other">%d বার</item>
+    </plurals>
+    <plurals name="phases_count">
+        <item quantity="one">%d ধাপ</item>
+        <item quantity="other">%d ধাপ</item>
+    </plurals>
+
+    <!-- Medicine forms -->
+    <string name="form_tablet">ট্যাবলেট</string>
+    <string name="form_capsule">ক্যাপসুল</string>
+    <string name="form_syrup">সিরাপ</string>
+    <string name="form_injection">ইনজেকশন</string>
+    <string name="form_drop">ড্রপ</string>
+    <string name="form_other">অন্যান্য</string>
 </resources>
