@@ -1,0 +1,8 @@
+<resources>
+    <string name="nav_today">আজ</string>
+    <string name="nav_medicines">ওষুধ</string>
+    <string name="nav_history">ইতিহাস</string>
+    <string name="nav_settings">সেটিংস</string>
+
+    <string name="coming_soon">শীঘ্রই আসছে</string>
+</resources>

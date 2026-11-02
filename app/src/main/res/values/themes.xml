@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.MedicineTime" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.MedicineTime" parent="android:Theme.Material.Light.NoActionBar">
+        <!-- Navy launch screen so dark mode doesn't flash white on start -->
+        <item name="android:windowSplashScreenBackground">@color/navy</item>
+    </style>
 </resources>
