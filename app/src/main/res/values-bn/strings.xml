@@ -35,7 +35,7 @@
     <string name="meal_snacks">বিকেলের নাস্তা</string>
     <string name="meal_dinner">রাতের খাবার</string>
 
-    <!-- Medicines -->
+    <!-- Medicines list -->
     <string name="add_medicine">ওষুধ যোগ করুন</string>
     <string name="medicines_empty">এখনও কোনো ওষুধ নেই</string>
     <string name="medicines_empty_hint">প্রথম ওষুধ যোগ করতে ওষুধ যোগ করুন বোতামে চাপুন।</string>
@@ -62,4 +62,59 @@
     <string name="form_injection">ইনজেকশন</string>
     <string name="form_drop">ড্রপ</string>
     <string name="form_other">অন্যান্য</string>
+
+    <!-- Dose units -->
+    <string name="unit_tablet">ট্যাবলেট</string>
+    <string name="unit_ml">মিলি</string>
+    <string name="unit_tsp">চা-চামচ</string>
+    <string name="unit_tbsp">টেবিল-চামচ</string>
+    <string name="unit_drop">ফোঁটা</string>
+    <string name="unit_unit">ইউনিট</string>
+
+    <!-- Slot and repeat types -->
+    <string name="slot_clock">নির্দিষ্ট সময়ে</string>
+    <string name="slot_meal_before">খাবারের আগে</string>
+    <string name="slot_meal_after">খাবারের পরে</string>
+    <string name="repeat_every_n">কয়েক দিন পরপর</string>
+
+    <!-- Add / edit medicine -->
+    <string name="edit_medicine">ওষুধ সম্পাদনা</string>
+    <string name="medicine_name">ওষুধের নাম</string>
+    <string name="name_required">নাম লিখুন।</string>
+    <string name="medicine_form">ধরন</string>
+    <string name="dose_unit">ডোজের একক</string>
+    <string name="schedule_type">কীভাবে খাবেন?</string>
+    <string name="schedule_mode_scheduled">নির্দিষ্ট সময়সূচি</string>
+    <string name="as_needed_hint">কোনো অ্যালার্ম বাজবে না। যখন দরকার, তখন এখন খান বোতামে চাপবেন।</string>
+    <string name="stock_label">মজুত (ঐচ্ছিক)</string>
+    <string name="number_invalid">সঠিক সংখ্যা লিখুন।</string>
+    <string name="default_dose_label">সাধারণ ডোজ (ঐচ্ছিক)</string>
+    <string name="low_stock_label">মজুত এতে নামলে জানান (ঐচ্ছিক)</string>
+    <string name="notes_label">নোট (ঐচ্ছিক)</string>
+    <string name="dose_invalid">০-এর চেয়ে বেশি সংখ্যা লিখুন।</string>
+    <string name="fix_errors">লাল চিহ্নিত ঘরগুলো ঠিক করুন।</string>
+    <string name="delete_medicine_title">ওষুধ মুছবেন?</string>
+    <string name="delete_medicine_message">%1$s এই ফোন থেকে মুছে যাবে।</string>
+
+    <!-- Schedule phases -->
+    <string name="schedule_title">সময়সূচি</string>
+    <string name="phase_title">ধাপ %1$d</string>
+    <string name="add_phase">ধাপ যোগ করুন</string>
+    <string name="remove_phase">ধাপ মুছুন</string>
+    <string name="start_date">শুরু</string>
+    <string name="end_date">শেষ</string>
+    <string name="date_end_before_start">শেষের তারিখ শুরুর তারিখের আগে।</string>
+    <string name="phase_overlap">এই ধাপ আগের ধাপের সঙ্গে মিলে যাচ্ছে।</string>
+    <string name="phase_gap">আগের ধাপের পর কয়েক দিন ফাঁক আছে। ওই দিনগুলোতে কোনো ডোজ নেই।</string>
+    <string name="repeat_label">পুনরাবৃত্তি</string>
+    <string name="weekdays_empty">অন্তত একটি দিন বেছে নিন।</string>
+    <string name="interval_label">কত দিন পরপর</string>
+    <string name="interval_invalid">১ বা তার বেশি লিখুন।</string>
+    <string name="times_title">সময় ও ডোজ</string>
+    <string name="add_time">সময় যোগ করুন</string>
+    <string name="remove_time">সময় মুছুন</string>
+    <string name="no_slots">অন্তত একটি সময় যোগ করুন।</string>
+    <string name="duplicate_slots">দুটি সময় একই।</string>
+    <string name="dose_label">ডোজ</string>
+    <string name="minutes_label">মিনিট</string>
 </resources>

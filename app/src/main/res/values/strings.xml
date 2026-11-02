@@ -37,7 +37,7 @@
     <string name="meal_snacks">Snacks</string>
     <string name="meal_dinner">Dinner</string>
 
-    <!-- Medicines -->
+    <!-- Medicines list -->
     <string name="add_medicine">Add medicine</string>
     <string name="medicines_empty">No medicines yet</string>
     <string name="medicines_empty_hint">Tap Add medicine to add the first one.</string>
@@ -64,4 +64,59 @@
     <string name="form_injection">Injection</string>
     <string name="form_drop">Drop</string>
     <string name="form_other">Other</string>
+
+    <!-- Dose units -->
+    <string name="unit_tablet">tablet</string>
+    <string name="unit_ml">ml</string>
+    <string name="unit_tsp">tsp</string>
+    <string name="unit_tbsp">tbsp</string>
+    <string name="unit_drop">drop</string>
+    <string name="unit_unit">unit</string>
+
+    <!-- Slot and repeat types -->
+    <string name="slot_clock">At a time</string>
+    <string name="slot_meal_before">Before a meal</string>
+    <string name="slot_meal_after">After a meal</string>
+    <string name="repeat_every_n">Every few days</string>
+
+    <!-- Add / edit medicine -->
+    <string name="edit_medicine">Edit medicine</string>
+    <string name="medicine_name">Medicine name</string>
+    <string name="name_required">Enter a name.</string>
+    <string name="medicine_form">Form</string>
+    <string name="dose_unit">Dose unit</string>
+    <string name="schedule_type">How is it taken?</string>
+    <string name="schedule_mode_scheduled">On a schedule</string>
+    <string name="as_needed_hint">No alarms. You will tap Take now whenever you need a dose.</string>
+    <string name="stock_label">Stock in hand (optional)</string>
+    <string name="number_invalid">Enter a valid number.</string>
+    <string name="default_dose_label">Usual dose (optional)</string>
+    <string name="low_stock_label">Warn me when stock falls to (optional)</string>
+    <string name="notes_label">Notes (optional)</string>
+    <string name="dose_invalid">Enter a number above 0.</string>
+    <string name="fix_errors">Please fix the items marked in red.</string>
+    <string name="delete_medicine_title">Delete medicine?</string>
+    <string name="delete_medicine_message">%1$s will be removed from this phone.</string>
+
+    <!-- Schedule phases -->
+    <string name="schedule_title">Schedule</string>
+    <string name="phase_title">Phase %1$d</string>
+    <string name="add_phase">Add phase</string>
+    <string name="remove_phase">Remove phase</string>
+    <string name="start_date">Start</string>
+    <string name="end_date">End</string>
+    <string name="date_end_before_start">The end date is before the start date.</string>
+    <string name="phase_overlap">This phase overlaps the previous phase.</string>
+    <string name="phase_gap">There is a gap after the previous phase. No doses are planned on those days.</string>
+    <string name="repeat_label">Repeats</string>
+    <string name="weekdays_empty">Pick at least one day.</string>
+    <string name="interval_label">Every how many days</string>
+    <string name="interval_invalid">Enter 1 or more.</string>
+    <string name="times_title">Times and doses</string>
+    <string name="add_time">Add time</string>
+    <string name="remove_time">Remove time</string>
+    <string name="no_slots">Add at least one time.</string>
+    <string name="duplicate_slots">Two times are the same.</string>
+    <string name="dose_label">Dose</string>
+    <string name="minutes_label">Minutes</string>
 </resources>

@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -26,15 +25,14 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.mrjis.medicinetime.R
 import com.mrjis.medicinetime.data.local.entity.ProfileEntity
-import com.mrjis.medicinetime.ui.components.ScreenPlaceholder
 import com.mrjis.medicinetime.ui.navigation.Routes
 import com.mrjis.medicinetime.ui.navigation.Screen
 import com.mrjis.medicinetime.ui.profile.ProfileDraft
 import com.mrjis.medicinetime.ui.profile.ProfilesViewModel
 import com.mrjis.medicinetime.ui.screens.FirstProfileScreen
 import com.mrjis.medicinetime.ui.screens.HistoryScreen
+import com.mrjis.medicinetime.ui.screens.MedicineEditScreen
 import com.mrjis.medicinetime.ui.screens.MedicinesScreen
 import com.mrjis.medicinetime.ui.screens.ProfilesScreen
 import com.mrjis.medicinetime.ui.screens.SettingsScreen
@@ -154,7 +152,7 @@ private fun MainContent(
                 )
             }
 
-            // Placeholder until M1c builds the real add/edit form.
+            // Add (no id) or edit (id) a medicine.
             composable(
                 route = Routes.MEDICINE_EDIT_PATTERN,
                 arguments = listOf(
@@ -165,10 +163,7 @@ private fun MainContent(
                     }
                 )
             ) {
-                ScreenPlaceholder(
-                    title = stringResource(R.string.add_medicine),
-                    modifier = Modifier.statusBarsPadding()
-                )
+                MedicineEditScreen(onClose = { navController.popBackStack() })
             }
         }
     }
