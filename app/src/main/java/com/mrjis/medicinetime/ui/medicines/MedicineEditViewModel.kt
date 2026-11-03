@@ -95,7 +95,9 @@ class MedicineEditViewModel(
         }
         if (_saving.value) return
         _saving.value = true
-        viewModelScope.launch {
+        // appScope (not viewModelScope): the save and the alarm re-plan must finish
+        // even if the screen is closed right after pressing Save.
+        container.appScope.launch {
             try {
                 val profileId = existing?.profileId
                     ?: container.currentProfileProvider.current.filterNotNull().first().id
@@ -113,7 +115,7 @@ class MedicineEditViewModel(
 
     fun delete() {
         val id = medicineId ?: return
-        viewModelScope.launch {
+        container.appScope.launch {
             container.medicineRepository.delete(id)
             existing?.profileId?.let { container.alarmScheduler.scheduleNextById(it) }
             _finished.value = true

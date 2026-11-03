@@ -19,6 +19,7 @@ enum class Screen(
 /** Other destinations, reached from inside the app (no bottom bar). */
 object Routes {
     const val PROFILES = "profiles"
+    const val SETUP = "setup"
 
     const val MEDICINE_EDIT = "medicine_edit"
     const val MEDICINE_ID_ARG = "medicineId"

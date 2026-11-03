@@ -1,0 +1,31 @@
+<resources>
+    <string name="setup_title">রিমাইন্ডার সেটআপ</string>
+    <string name="setup_intro">Medicine Time অ্যালার্ম ঘড়ির মতো কাজ করে। ফোন লক থাকলে বা অ্যাপ বন্ধ থাকলেও যেন ঠিক সময়ে বাজে, এই সেটিংসগুলো তা নিশ্চিত করে।</string>
+    <string name="setup_all_good">সব জরুরি সেটিং ঠিক আছে।</string>
+    <string name="setup_needs_attention">কিছু বিষয়ে আপনার নজর দরকার।</string>
+    <string name="setup_status_ok">প্রস্তুত</string>
+    <string name="setup_status_todo">করণীয় আছে</string>
+
+    <string name="setup_notifications_title">নোটিফিকেশন</string>
+    <string name="setup_notifications_desc">রিমাইন্ডার দেখানোর জন্য দরকার। এটি বন্ধ থাকলে কোনো রিমাইন্ডার দেখা যাবে না।</string>
+    <string name="setup_notifications_button">নোটিফিকেশন চালু করুন</string>
+
+    <string name="setup_exact_title">সঠিক সময়ের অ্যালার্ম</string>
+    <string name="setup_exact_desc">রিমাইন্ডার ঠিক মিনিটে বাজতে সাহায্য করে।</string>
+    <string name="setup_exact_button">সঠিক অ্যালার্ম চালু করুন</string>
+
+    <string name="setup_fullscreen_title">লক স্ক্রিনের উপরে দেখানো</string>
+    <string name="setup_fullscreen_desc">ফোন লক থাকলেও অ্যালার্ম স্ক্রিন উপরে খুলতে দেয়।</string>
+    <string name="setup_fullscreen_button">ফুল স্ক্রিন অ্যালার্ট চালু করুন</string>
+
+    <string name="setup_battery_title">ব্যাটারি: কোনো বিধিনিষেধ নয়</string>
+    <string name="setup_battery_desc">ফোনকে অ্যাপটি ঘুম পাড়িয়ে দেওয়া থেকে আটকায়।</string>
+    <string name="setup_battery_button">বিধিনিষেধ সরান</string>
+
+    <string name="setup_oem_title">ফোন ব্র্যান্ডের সেটিংস</string>
+    <string name="setup_oem_desc">শাওমি, রিয়েলমি, অপো, ভিভো, স্যামসাং ও আরও কিছু ফোন ব্যাকগ্রাউন্ডে অ্যাপ বন্ধ করে দেয়। ফোনের সেটিংসে গিয়ে:\n১. Medicine Time-এর জন্য অটোস্টার্ট চালু করুন।\n২. ব্যাটারি ব্যবহার ‘কোনো বিধিনিষেধ নয়’ করুন।\n৩. রিসেন্ট অ্যাপ তালিকায় Medicine Time লক করুন।</string>
+    <string name="setup_oem_button">আমার ফোনের জন্য আরও সাহায্য</string>
+
+    <string name="setup_row_title">রিমাইন্ডার সেটআপ</string>
+    <string name="setup_row_hint">অ্যালার্ম ঠিক সময়ে বাজবে কি না দেখুন</string>
+</resources>

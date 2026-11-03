@@ -1,0 +1,31 @@
+<resources>
+    <string name="setup_title">Reminder setup</string>
+    <string name="setup_intro">Medicine Time works like an alarm clock. These settings make sure it rings on time, even when the phone is locked or the app is closed.</string>
+    <string name="setup_all_good">Everything important is set up.</string>
+    <string name="setup_needs_attention">Some items still need your attention.</string>
+    <string name="setup_status_ok">Ready</string>
+    <string name="setup_status_todo">Needs action</string>
+
+    <string name="setup_notifications_title">Notifications</string>
+    <string name="setup_notifications_desc">Needed to show reminders. Without this, no reminder can appear.</string>
+    <string name="setup_notifications_button">Allow notifications</string>
+
+    <string name="setup_exact_title">Exact alarms</string>
+    <string name="setup_exact_desc">Lets reminders ring at the exact minute.</string>
+    <string name="setup_exact_button">Allow exact alarms</string>
+
+    <string name="setup_fullscreen_title">Show over the lock screen</string>
+    <string name="setup_fullscreen_desc">Lets the alarm screen open on top when the phone is locked.</string>
+    <string name="setup_fullscreen_button">Allow full screen alerts</string>
+
+    <string name="setup_battery_title">Battery: no restrictions</string>
+    <string name="setup_battery_desc">Stops the phone from putting the app to sleep.</string>
+    <string name="setup_battery_button">Remove restriction</string>
+
+    <string name="setup_oem_title">Phone brand settings</string>
+    <string name="setup_oem_desc">Xiaomi, Realme, Oppo, Vivo, Samsung and some other phones close apps in the background. Open your phone settings and:\n1. Turn on Autostart for Medicine Time.\n2. Set battery use to No restrictions.\n3. Lock Medicine Time in the recent apps list.</string>
+    <string name="setup_oem_button">More help for my phone</string>
+
+    <string name="setup_row_title">Reminder setup</string>
+    <string name="setup_row_hint">Check that alarms can ring on time</string>
+</resources>

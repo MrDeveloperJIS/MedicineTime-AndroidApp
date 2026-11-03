@@ -12,9 +12,14 @@ import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -25,6 +30,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.mrjis.medicinetime.alarm.SetupStatus
 import com.mrjis.medicinetime.data.local.entity.ProfileEntity
 import com.mrjis.medicinetime.ui.navigation.Routes
 import com.mrjis.medicinetime.ui.navigation.Screen
@@ -36,6 +42,7 @@ import com.mrjis.medicinetime.ui.screens.MedicineEditScreen
 import com.mrjis.medicinetime.ui.screens.MedicinesScreen
 import com.mrjis.medicinetime.ui.screens.ProfilesScreen
 import com.mrjis.medicinetime.ui.screens.SettingsScreen
+import com.mrjis.medicinetime.ui.screens.SetupScreen
 import com.mrjis.medicinetime.ui.screens.TodayScreen
 
 @Composable
@@ -73,10 +80,20 @@ private fun MainContent(
     current: ProfileEntity?,
     profilesViewModel: ProfilesViewModel
 ) {
+    val context = LocalContext.current
     val navController = rememberNavController()
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = backStackEntry?.destination?.route
     val showBottomBar = Screen.entries.any { it.route == currentRoute }
+
+    // Once per app start: if reminders cannot work yet, open the setup checklist.
+    var setupChecked by rememberSaveable { mutableStateOf(false) }
+    LaunchedEffect(Unit) {
+        if (!setupChecked) {
+            setupChecked = true
+            if (!SetupStatus.criticalOk(context)) navController.navigate(Routes.SETUP)
+        }
+    }
 
     Scaffold(
         bottomBar = {
@@ -139,7 +156,14 @@ private fun MainContent(
             }
 
             composable(Screen.History.route) { HistoryScreen() }
-            composable(Screen.Settings.route) { SettingsScreen() }
+
+            composable(Screen.Settings.route) {
+                SettingsScreen(onOpenSetup = { navController.navigate(Routes.SETUP) })
+            }
+
+            composable(Routes.SETUP) {
+                SetupScreen(onBack = { navController.popBackStack() })
+            }
 
             composable(Routes.PROFILES) {
                 ProfilesScreen(
