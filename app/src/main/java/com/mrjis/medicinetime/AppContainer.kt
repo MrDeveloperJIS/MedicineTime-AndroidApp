@@ -8,6 +8,7 @@ import com.mrjis.medicinetime.data.prefs.AppPreferences
 import com.mrjis.medicinetime.data.repository.CurrentProfileProvider
 import com.mrjis.medicinetime.data.repository.MedicineRepository
 import com.mrjis.medicinetime.data.repository.ProfileRepository
+import com.mrjis.medicinetime.domain.dose.MissedDoseSweeper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -28,6 +29,9 @@ class AppContainer(context: Context) {
 
     val alarmScheduler = AlarmScheduler(appContext, profileRepository, medicineRepository, doseLogDao)
 
-    /** Taken / Snooze logic shared by the alarm screen and the notification buttons. */
+    /** Taken / Snooze logic shared by the alarm screen, the notification buttons and the Today screen. */
     val doseActions = DoseActions(appContext, doseLogDao, alarmScheduler)
+
+    /** Marks unanswered doses as MISSED. */
+    val missedSweeper = MissedDoseSweeper(profileRepository, medicineRepository, doseLogDao)
 }

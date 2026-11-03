@@ -1,0 +1,49 @@
+<resources>
+    <string name="today_progress">%1$d of %2$d taken</string>
+    <string name="today_empty">No doses planned today</string>
+    <string name="today_empty_hint">Add medicines in the Medicines tab.</string>
+
+    <string name="today_status_due">Due now</string>
+    <string name="today_status_snoozed">Snoozed until %1$s</string>
+    <string name="today_status_missed">Missed</string>
+    <string name="today_status_taken">Taken at %1$s</string>
+
+    <string name="today_action_taken">Taken</string>
+    <string name="today_action_all_taken">All taken</string>
+
+    <string name="today_taken_one">%1$s marked as taken</string>
+    <plurals name="today_taken_many">
+        <item quantity="one">%d medicine marked as taken</item>
+        <item quantity="other">%d medicines marked as taken</item>
+    </plurals>
+    <string name="undo">Undo</string>
+
+    <!-- Missed warning card -->
+    <string name="today_missed_title">Missed doses</string>
+    <string name="today_missed_hint">Not sure if it is still safe to take a missed dose? Ask your doctor or pharmacist.</string>
+    <string name="today_missed_at_today">Today, %1$s</string>
+    <string name="today_missed_at_yesterday">Yesterday, %1$s</string>
+    <string name="today_missed_detail">%1$s · %2$s</string>
+    <string name="today_action_taken_late">Taken late</string>
+    <string name="today_action_all_taken_late">All taken late</string>
+
+    <!-- As needed -->
+    <string name="today_action_take_now">Take now</string>
+    <string name="today_last_taken">Last taken: %1$s (%2$s)</string>
+    <string name="today_last_taken_never">Not taken yet</string>
+    <string name="today_when_yesterday">Yesterday, %1$s</string>
+    <string name="today_when_date">%1$s, %2$s</string>
+    <string name="today_ago_now">just now</string>
+    <string name="today_ago_minutes">%1$d min ago</string>
+    <string name="today_ago_hours">%1$d h ago</string>
+    <string name="today_ago_days">%1$d d ago</string>
+
+    <!-- Take now sheet -->
+    <string name="take_now_title">Take now</string>
+    <string name="take_now_time">Time: %1$s</string>
+    <string name="take_now_dose_label">Dose</string>
+    <string name="take_now_confirm">Confirm</string>
+    <string name="take_now_decrease">Decrease dose</string>
+    <string name="take_now_increase">Increase dose</string>
+    <string name="take_now_invalid">Enter a dose above 0</string>
+</resources>

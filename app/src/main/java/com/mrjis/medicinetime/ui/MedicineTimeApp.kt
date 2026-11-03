@@ -142,7 +142,14 @@ private fun MainContent(
             startDestination = Screen.Today.route,
             modifier = Modifier.padding(innerPadding)
         ) {
-            composable(Screen.Today.route) { TodayScreen() }
+            composable(Screen.Today.route) {
+                TodayScreen(
+                    currentProfile = current,
+                    profiles = profiles,
+                    onSelectProfile = profilesViewModel::select,
+                    onManageProfiles = { navController.navigate(Routes.PROFILES) }
+                )
+            }
 
             composable(Screen.Medicines.route) {
                 MedicinesScreen(

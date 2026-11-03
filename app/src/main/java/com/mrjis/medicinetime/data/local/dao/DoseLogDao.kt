@@ -28,6 +28,14 @@ interface DoseLogDao {
     @Query("SELECT * FROM dose_logs WHERE profileId = :profileId AND status = 'SNOOZED'")
     suspend fun getSnoozed(profileId: String): List<DoseLogEntity>
 
+    /** Doses that rang and are still waiting for an answer. */
+    @Query("SELECT * FROM dose_logs WHERE profileId = :profileId AND status = 'PENDING'")
+    suspend fun getPending(profileId: String): List<DoseLogEntity>
+
+    /** Every unanswered dose of every profile (the missed-dose sweep checks these). */
+    @Query("SELECT * FROM dose_logs WHERE status IN ('PENDING', 'SNOOZED')")
+    suspend fun getOpen(): List<DoseLogEntity>
+
     @Query("DELETE FROM dose_logs WHERE id = :id")
     suspend fun delete(id: String)
 
@@ -37,6 +45,13 @@ interface DoseLogDao {
                 "AND scheduledAt >= :fromMillis AND scheduledAt < :toMillis ORDER BY scheduledAt"
     )
     fun observeBetween(profileId: String, fromMillis: Long, toMillis: Long): Flow<List<DoseLogEntity>>
+
+    /** Scheduled doses marked MISSED since [sinceMillis] (feeds the warning card on Today). */
+    @Query(
+        "SELECT * FROM dose_logs WHERE profileId = :profileId AND source = 'SCHEDULED' " +
+                "AND status = 'MISSED' AND scheduledAt >= :sinceMillis ORDER BY scheduledAt"
+    )
+    fun observeMissedSince(profileId: String, sinceMillis: Long): Flow<List<DoseLogEntity>>
 
     /** Most recent as-needed dose of a medicine ("Last taken: 2:30 PM"). */
     @Query(

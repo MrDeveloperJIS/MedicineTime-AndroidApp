@@ -10,11 +10,13 @@ import com.mrjis.medicinetime.MedicineTimeApplication
 import com.mrjis.medicinetime.ui.medicines.MedicineEditViewModel
 import com.mrjis.medicinetime.ui.medicines.MedicinesViewModel
 import com.mrjis.medicinetime.ui.profile.ProfilesViewModel
+import com.mrjis.medicinetime.ui.today.TodayViewModel
 
 object AppViewModelProvider {
     val Factory = viewModelFactory {
         initializer { ProfilesViewModel(appContainer()) }
         initializer { MedicinesViewModel(appContainer()) }
+        initializer { TodayViewModel(appContainer()) }
         // The SavedStateHandle carries the medicineId navigation argument.
         initializer { MedicineEditViewModel(createSavedStateHandle(), appContainer()) }
     }

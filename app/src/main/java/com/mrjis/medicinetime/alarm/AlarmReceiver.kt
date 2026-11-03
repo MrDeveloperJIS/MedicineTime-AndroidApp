@@ -110,7 +110,7 @@ class AlarmReceiver : BroadcastReceiver() {
             .filter { (it.actionAt ?: 0L) <= now + SNOOZE_GRACE_MILLIS }
         due.forEach { log ->
             container.doseLogDao.upsert(
-                log.copy(status = DoseStatus.PENDING, actionAt = null, updatedAt = now)
+                log.copy(status = DoseStatus.PENDING, actionAt = now, updatedAt = now)
             )
         }
 
