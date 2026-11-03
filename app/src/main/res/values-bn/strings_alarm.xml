@@ -1,6 +1,25 @@
 <resources>
     <string name="alarm_channel_name">ওষুধের রিমাইন্ডার</string>
-    <string name="alarm_channel_description">ওষুধ খাওয়ার সময় হলে জানায়।</string>
+    <string name="alarm_channel_description">ওষুধ খাওয়ার সময় হলে বাজে এবং স্ক্রিন খোলে।</string>
     <string name="alarm_notification_title">%1$s: ওষুধ খাওয়ার সময়</string>
-    <string name="alarm_dose_line">%1$s, %2$s %3$s</string>
+    <string name="alarm_placeholder_title">ওষুধ খাওয়ার সময়</string>
+
+    <!-- "নাপা, ১ ট্যাবলেট" এবং "কাশির সিরাপ, ২ চা-চামচ (১০ মিলি)" -->
+    <string name="alarm_dose_line">%1$s, %2$s</string>
+    <string name="alarm_dose_plain">%1$s %2$s</string>
+    <string name="alarm_dose_with_ml">%1$s %2$s (%3$s মিলি)</string>
+
+    <!-- Alarm screen -->
+    <string name="alarm_screen_title">ওষুধ খাওয়ার সময়</string>
+    <string name="alarm_pick_hint">যে ওষুধ খাননি তার টিক তুলে দিন।</string>
+    <string name="alarm_taken">খেয়েছি</string>
+    <string name="alarm_snooze">পরে মনে করান</string>
+    <string name="alarm_snooze_minutes">%1$d মিনিট</string>
+    <plurals name="alarm_snooze_hours">
+        <item quantity="one">%d ঘণ্টা</item>
+        <item quantity="other">%d ঘণ্টা</item>
+    </plurals>
+
+    <!-- Notification button -->
+    <string name="alarm_action_snooze">%1$d মিনিট পরে মনে করান</string>
 </resources>

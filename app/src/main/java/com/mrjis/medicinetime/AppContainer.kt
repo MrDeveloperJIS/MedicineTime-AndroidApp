@@ -2,6 +2,7 @@ package com.mrjis.medicinetime
 
 import android.content.Context
 import com.mrjis.medicinetime.alarm.AlarmScheduler
+import com.mrjis.medicinetime.alarm.DoseActions
 import com.mrjis.medicinetime.data.local.AppDatabase
 import com.mrjis.medicinetime.data.prefs.AppPreferences
 import com.mrjis.medicinetime.data.repository.CurrentProfileProvider
@@ -25,5 +26,8 @@ class AppContainer(context: Context) {
     val currentProfileProvider = CurrentProfileProvider(profileRepository, preferences)
     val doseLogDao = database.doseLogDao()
 
-    val alarmScheduler = AlarmScheduler(appContext, profileRepository, medicineRepository)
+    val alarmScheduler = AlarmScheduler(appContext, profileRepository, medicineRepository, doseLogDao)
+
+    /** Taken / Snooze logic shared by the alarm screen and the notification buttons. */
+    val doseActions = DoseActions(appContext, doseLogDao, alarmScheduler)
 }

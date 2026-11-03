@@ -15,6 +15,19 @@ interface DoseLogDao {
     @Query("SELECT * FROM dose_logs WHERE id = :id")
     suspend fun get(id: String): DoseLogEntity?
 
+    @Query("SELECT * FROM dose_logs WHERE id IN (:ids)")
+    suspend fun getByIds(ids: List<String>): List<DoseLogEntity>
+
+    /** Live version of [getByIds]. The alarm screen uses it so it closes when a dose is answered elsewhere. */
+    @Query("SELECT * FROM dose_logs WHERE id IN (:ids)")
+    fun observeByIds(ids: List<String>): Flow<List<DoseLogEntity>>
+
+    /**
+     * Doses the user snoozed. For a SNOOZED row, actionAt is the moment it should ring again.
+     */
+    @Query("SELECT * FROM dose_logs WHERE profileId = :profileId AND status = 'SNOOZED'")
+    suspend fun getSnoozed(profileId: String): List<DoseLogEntity>
+
     @Query("DELETE FROM dose_logs WHERE id = :id")
     suspend fun delete(id: String)
 

@@ -1,6 +1,25 @@
 <resources>
     <string name="alarm_channel_name">Dose reminders</string>
-    <string name="alarm_channel_description">Tells you when it is time to take a medicine.</string>
+    <string name="alarm_channel_description">Rings and opens a screen when it is time to take a medicine.</string>
     <string name="alarm_notification_title">%1$s: time for medicine</string>
-    <string name="alarm_dose_line">%1$s, %2$s %3$s</string>
+    <string name="alarm_placeholder_title">Time for medicine</string>
+
+    <!-- "Napa, 1 tablet" and "Cough syrup, 2 tsp (10 ml)" -->
+    <string name="alarm_dose_line">%1$s, %2$s</string>
+    <string name="alarm_dose_plain">%1$s %2$s</string>
+    <string name="alarm_dose_with_ml">%1$s %2$s (%3$s ml)</string>
+
+    <!-- Alarm screen -->
+    <string name="alarm_screen_title">Time for medicine</string>
+    <string name="alarm_pick_hint">Untick any medicine you did not take.</string>
+    <string name="alarm_taken">Taken</string>
+    <string name="alarm_snooze">Snooze</string>
+    <string name="alarm_snooze_minutes">%1$d min</string>
+    <plurals name="alarm_snooze_hours">
+        <item quantity="one">%d hour</item>
+        <item quantity="other">%d hours</item>
+    </plurals>
+
+    <!-- Notification button -->
+    <string name="alarm_action_snooze">Snooze %1$d min</string>
 </resources>
