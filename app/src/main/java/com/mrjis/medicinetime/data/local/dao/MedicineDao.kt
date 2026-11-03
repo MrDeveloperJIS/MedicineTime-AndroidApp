@@ -32,6 +32,17 @@ abstract class MedicineDao {
     @Query("UPDATE medicines SET deletedAt = :now, updatedAt = :now WHERE id = :id")
     abstract suspend fun softDelete(id: String, now: Long)
 
+    /**
+     * Moves the stock baseline (a refill). updatedAt is left alone on purpose: the Today plan
+     * and the missed sweep ignore doses planned before updatedAt, so bumping it here would
+     * hide today's earlier doses. stockBaselineAt is the "last changed" time for stock.
+     */
+    @Query(
+        "UPDATE medicines SET stockBaseline = :baseline, stockBaselineAt = :at " +
+                "WHERE id = :id AND deletedAt IS NULL"
+    )
+    abstract suspend fun setStock(id: String, baseline: Double, at: Long)
+
     // Upsert (insert or update) never deletes the old row, so child rows are not cascaded away.
     @Upsert
     protected abstract suspend fun upsertMedicine(medicine: MedicineEntity)

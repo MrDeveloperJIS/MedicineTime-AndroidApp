@@ -46,6 +46,13 @@ interface DoseLogDao {
     )
     fun observeBetween(profileId: String, fromMillis: Long, toMillis: Long): Flow<List<DoseLogEntity>>
 
+    /** One-shot version of [observeBetween] (the stock check uses it). */
+    @Query(
+        "SELECT * FROM dose_logs WHERE profileId = :profileId " +
+                "AND scheduledAt >= :fromMillis AND scheduledAt < :toMillis ORDER BY scheduledAt"
+    )
+    suspend fun getBetween(profileId: String, fromMillis: Long, toMillis: Long): List<DoseLogEntity>
+
     /** Scheduled doses marked MISSED since [sinceMillis] (feeds the warning card on Today). */
     @Query(
         "SELECT * FROM dose_logs WHERE profileId = :profileId AND source = 'SCHEDULED' " +
@@ -59,4 +66,20 @@ interface DoseLogDao {
                 "ORDER BY scheduledAt DESC LIMIT 1"
     )
     fun observeLastAsNeeded(medicineId: String): Flow<DoseLogEntity?>
+
+    /**
+     * Every dose of the profile that was TAKEN at or after [sinceMillis] (scheduled and as-needed).
+     * Stock is "baseline minus these", so taking a dose never writes to the medicine row.
+     */
+    @Query(
+        "SELECT * FROM dose_logs WHERE profileId = :profileId AND status = 'TAKEN' " +
+                "AND COALESCE(actionAt, scheduledAt) >= :sinceMillis"
+    )
+    fun observeTakenSince(profileId: String, sinceMillis: Long): Flow<List<DoseLogEntity>>
+
+    @Query(
+        "SELECT * FROM dose_logs WHERE profileId = :profileId AND status = 'TAKEN' " +
+                "AND COALESCE(actionAt, scheduledAt) >= :sinceMillis"
+    )
+    suspend fun getTakenSince(profileId: String, sinceMillis: Long): List<DoseLogEntity>
 }
