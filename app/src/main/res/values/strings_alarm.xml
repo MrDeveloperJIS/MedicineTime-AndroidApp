@@ -1,0 +1,6 @@
+<resources>
+    <string name="alarm_channel_name">Dose reminders</string>
+    <string name="alarm_channel_description">Tells you when it is time to take a medicine.</string>
+    <string name="alarm_notification_title">%1$s: time for medicine</string>
+    <string name="alarm_dose_line">%1$s, %2$s %3$s</string>
+</resources>

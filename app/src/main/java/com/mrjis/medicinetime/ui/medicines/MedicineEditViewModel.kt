@@ -102,6 +102,8 @@ class MedicineEditViewModel(
                 val id = medicineId ?: newId()
                 val (entity, phases) = d.toEntities(id, profileId, existing, System.currentTimeMillis())
                 container.medicineRepository.save(entity, phases)
+                // The schedule changed, so re-plan this profile's next alarm.
+                container.alarmScheduler.scheduleNextById(profileId)
                 _finished.value = true
             } finally {
                 _saving.value = false
@@ -113,6 +115,7 @@ class MedicineEditViewModel(
         val id = medicineId ?: return
         viewModelScope.launch {
             container.medicineRepository.delete(id)
+            existing?.profileId?.let { container.alarmScheduler.scheduleNextById(it) }
             _finished.value = true
         }
     }
