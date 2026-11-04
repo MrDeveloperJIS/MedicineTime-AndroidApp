@@ -9,6 +9,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.core.app.NotificationCompat
 import com.mrjis.medicinetime.MainActivity
+import com.mrjis.medicinetime.MedicineTimeApplication
 import com.mrjis.medicinetime.R
 
 object AlarmNotifications {
@@ -65,7 +66,9 @@ object AlarmNotifications {
             AlarmActivity.createIntent(context, group.profileId, logIds),
             PI_FLAGS
         )
-        val snoozeMinutes = AlarmDefaults.DEFAULT_SNOOZE_MINUTES
+        // The notification's Snooze button uses the smallest snooze choice from Settings.
+        val snoozeMinutes =
+            (context.applicationContext as MedicineTimeApplication).container.settingsStore.defaultSnoozeMinutes
 
         return NotificationCompat.Builder(context, CHANNEL_DOSE_ALARM)
             .setSmallIcon(R.drawable.ic_nav_medicines)

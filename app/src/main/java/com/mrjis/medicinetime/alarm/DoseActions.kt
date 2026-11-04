@@ -6,12 +6,6 @@ import com.mrjis.medicinetime.data.local.entity.DoseLogEntity
 import com.mrjis.medicinetime.domain.model.DoseSource
 import com.mrjis.medicinetime.domain.model.DoseStatus
 
-/** Alarm defaults. Becomes user settings in M6. */
-object AlarmDefaults {
-    val SNOOZE_OPTIONS_MINUTES = listOf(15, 30, 60)
-    const val DEFAULT_SNOOZE_MINUTES = 15
-}
-
 /** One dose the user taps "Taken" on, from the Today screen. */
 data class DoseRequest(
     val medicineId: String,

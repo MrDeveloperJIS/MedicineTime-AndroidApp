@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
 import com.mrjis.medicinetime.data.local.entity.DoseLogEntity
+import com.mrjis.medicinetime.data.local.entity.HistoryLogRow
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -52,6 +53,18 @@ interface DoseLogDao {
                 "AND scheduledAt >= :fromMillis AND scheduledAt < :toMillis ORDER BY scheduledAt"
     )
     suspend fun getBetween(profileId: String, fromMillis: Long, toMillis: Long): List<DoseLogEntity>
+
+    /**
+     * Same as [observeBetween], plus each medicine's name and unit (also for deleted medicines).
+     * The History screens use it.
+     */
+    @Query(
+        "SELECT d.*, m.name AS medicineName, m.doseUnit AS doseUnit " +
+                "FROM dose_logs d INNER JOIN medicines m ON m.id = d.medicineId " +
+                "WHERE d.profileId = :profileId AND d.scheduledAt >= :fromMillis " +
+                "AND d.scheduledAt < :toMillis ORDER BY d.scheduledAt"
+    )
+    fun observeHistory(profileId: String, fromMillis: Long, toMillis: Long): Flow<List<HistoryLogRow>>
 
     /** Scheduled doses marked MISSED since [sinceMillis] (feeds the warning card on Today). */
     @Query(

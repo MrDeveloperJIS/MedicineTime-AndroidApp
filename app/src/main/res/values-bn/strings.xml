@@ -16,7 +16,6 @@
 
     <!-- Profiles -->
     <string name="profiles_title">প্রোফাইল</string>
-    <string name="manage_profiles">প্রোফাইল পরিচালনা</string>
     <string name="add_profile">প্রোফাইল যোগ করুন</string>
     <string name="edit_profile">প্রোফাইল সম্পাদনা</string>
     <string name="current_profile">বর্তমান</string>

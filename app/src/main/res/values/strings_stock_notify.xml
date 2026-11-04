@@ -1,0 +1,26 @@
+<resources>
+    <!-- Stock warning notifications -->
+    <string name="stock_channel_name">Stock warnings</string>
+    <string name="stock_channel_description">Tells you when a medicine is about to run out.</string>
+
+    <!-- Shown under the app name, so you know whose medicine it is -->
+    <string name="stock_notif_for_profile">For %1$s</string>
+
+    <!-- Titles (%1$s = medicine name) -->
+    <string name="stock_notif_title_low">%1$s is running low</string>
+    <string name="stock_notif_title_today">%1$s runs out today</string>
+    <string name="stock_notif_title_not_enough">%1$s: not enough for the next dose</string>
+    <string name="stock_notif_title_out">%1$s is out of stock</string>
+
+    <!-- Texts. %1$d = days left, %2$s = amount in stock -->
+    <plurals name="stock_notif_text_days">
+        <item quantity="one">%1$d day left. %2$s in stock. Buy more soon.</item>
+        <item quantity="other">%1$d days left. %2$s in stock. Buy more soon.</item>
+    </plurals>
+
+    <!-- %1$s = amount in stock -->
+    <string name="stock_notif_text_today">Your stock covers the last dose today. %1$s in stock. Buy more today.</string>
+    <string name="stock_notif_text_not_enough">%1$s in stock, which is not enough for the next dose. Buy more now.</string>
+    <string name="stock_notif_text_as_needed_low">%1$s left. Buy more soon.</string>
+    <string name="stock_notif_text_as_needed_out">None left. Buy more.</string>
+</resources>

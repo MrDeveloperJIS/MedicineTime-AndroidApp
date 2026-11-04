@@ -4,11 +4,25 @@ import com.mrjis.medicinetime.data.local.entity.DoseLogEntity
 import com.mrjis.medicinetime.domain.model.DoseSource
 import com.mrjis.medicinetime.domain.model.DoseStatus
 
-/** Pure rules about when a dose counts as missed. The window becomes a setting in M6. */
+/** Pure rules about when a dose counts as missed. The window is a setting (M6). */
 object DoseRules {
 
-    /** A dose unanswered this long after it rang is MISSED (plan 5.4: 2 hours). */
-    const val MISSED_WINDOW_MILLIS = 2 * 60 * 60_000L
+    /** Default missed window (plan 5.4: 2 hours). */
+    const val DEFAULT_MISSED_WINDOW_MILLIS = 2 * 60 * 60_000L
+
+    /**
+     * The current missed window. SettingsStore sets it at app start and whenever the user changes it.
+     */
+    @Volatile
+    var missedWindowMillis: Long = DEFAULT_MISSED_WINDOW_MILLIS
+
+    /**
+     * A dose unanswered this long after it rang is MISSED.
+     * Read at call time, so the planners and sweeper that use it as a default
+     * argument always see the latest setting.
+     */
+    val MISSED_WINDOW_MILLIS: Long
+        get() = missedWindowMillis
 
     /** The warning card on Today only lists doses missed within this time. */
     const val MISSED_BANNER_MILLIS = 24 * 60 * 60_000L

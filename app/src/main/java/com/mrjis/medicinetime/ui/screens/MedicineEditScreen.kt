@@ -185,7 +185,7 @@ fun MedicineEditScreen(
                     )
                 }
 
-                // ---- stock ----
+                // ---- stock (when editing, this is the current stock) ----
                 val stockSuffix = stringResource(
                     if (draft.stockUnit == StockUnit.ML) R.string.unit_ml else draft.doseUnit.labelRes()
                 )
@@ -199,6 +199,13 @@ fun MedicineEditScreen(
                     } else null,
                     modifier = Modifier.fillMaxWidth()
                 )
+                if (viewModel.isEditing) {
+                    Text(
+                        text = stringResource(R.string.stock_edit_hint),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
 
                 if (draft.scheduleMode == ScheduleMode.AS_NEEDED) {
                     // ---- as-needed fields ----

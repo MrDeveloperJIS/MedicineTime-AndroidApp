@@ -1,0 +1,36 @@
+<resources>
+    <string name="settings_section_appearance">Appearance</string>
+    <string name="settings_section_alarms">Alarms</string>
+    <string name="settings_section_general">Family and reminders</string>
+    <string name="settings_section_updates">App updates</string>
+
+    <string name="settings_theme">Theme</string>
+    <string name="theme_system">Follow the phone</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+
+    <string name="settings_language">Language</string>
+    <string name="language_system">Follow the phone</string>
+    <string name="language_english">English</string>
+    <string name="language_bangla">বাংলা</string>
+
+    <string name="settings_ringtone">Alarm sound</string>
+    <string name="ringtone_default">System default alarm sound</string>
+    <string name="ringtone_custom">Custom sound</string>
+    <string name="ringtone_pick_title">Choose alarm sound</string>
+
+    <string name="settings_snooze">Snooze choices</string>
+    <string name="snooze_dialog_hint">Pick 1 to %1$d choices. The smallest one is used by the notification button.</string>
+    <string name="settings_missed">Count a dose as missed after</string>
+
+    <string name="settings_profiles_title">Profiles and meal times</string>
+    <string name="settings_profiles_hint">Change names, colors and meal times.</string>
+
+    <string name="update_version">Version %1$s</string>
+    <string name="update_check">Check for updates</string>
+    <string name="update_checking">Checking…</string>
+    <string name="update_up_to_date">You have the latest version.</string>
+    <string name="update_available">Version %1$s is available.</string>
+    <string name="update_download">Open download page</string>
+    <string name="update_failed">Could not check. Make sure you are online and try again.</string>
+</resources>

@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,18 +19,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.mrjis.medicinetime.R
 import com.mrjis.medicinetime.data.local.entity.ProfileEntity
 
-/** Shows the current profile; tapping opens a menu to switch profile or manage profiles. */
+/** Shows the current profile; tapping opens a menu to switch profile. Managing profiles lives in Settings. */
 @Composable
 fun ProfileSwitcher(
     current: ProfileEntity,
     profiles: List<ProfileEntity>,
     onSelect: (String) -> Unit,
-    onManage: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     var expanded by remember { mutableStateOf(false) }
@@ -85,21 +81,6 @@ fun ProfileSwitcher(
                     modifier = Modifier.heightIn(min = 48.dp)
                 )
             }
-            HorizontalDivider()
-            DropdownMenuItem(
-                text = {
-                    Text(
-                        text = stringResource(R.string.manage_profiles),
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.primary
-                    )
-                },
-                onClick = {
-                    expanded = false
-                    onManage()
-                },
-                modifier = Modifier.heightIn(min = 48.dp)
-            )
         }
     }
 }

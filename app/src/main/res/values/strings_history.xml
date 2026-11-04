@@ -1,0 +1,44 @@
+<resources>
+    <!-- View switch and range -->
+    <string name="history_view_timeline">Timeline</string>
+    <string name="history_view_calendar">Calendar</string>
+    <string name="history_range_7">Last 7 days</string>
+    <string name="history_range_30">Last 30 days</string>
+
+    <!-- Day labels -->
+    <string name="history_day_today">Today</string>
+    <string name="history_day_yesterday">Yesterday</string>
+    <string name="history_day_tomorrow">Tomorrow</string>
+
+    <!-- Summary card -->
+    <string name="history_summary_percent">%1$d%%</string>
+    <string name="history_summary_percent_label">of doses taken</string>
+    <string name="history_summary_none">No finished doses yet</string>
+    <string name="history_stat_taken">Taken</string>
+    <string name="history_stat_missed">Missed</string>
+    <string name="history_summary_note">As-needed doses are not counted in the percentage.</string>
+
+    <!-- Empty states -->
+    <string name="history_empty">No history yet</string>
+    <string name="history_empty_hint">Doses you take or miss will show up here.</string>
+    <string name="history_no_doses_day">No doses on this day</string>
+
+    <!-- Dose rows -->
+    <string name="history_status_planned">Planned</string>
+    <string name="history_detail_as_needed">%1$s · As needed</string>
+
+    <!-- Delete a logged as-needed dose -->
+    <string name="history_delete_desc">Delete %1$s at %2$s</string>
+    <string name="history_delete_title">Delete this entry?</string>
+    <string name="history_delete_message">%1$s, %2$s, %3$s will be removed from History. The stock will be added back.</string>
+    <string name="history_deleted">Entry deleted. Stock added back.</string>
+
+    <!-- Calendar -->
+    <string name="history_prev_month">Previous month</string>
+    <string name="history_next_month">Next month</string>
+    <string name="history_legend_all_taken">All taken</string>
+    <string name="history_legend_missed">Some missed</string>
+    <string name="history_legend_open">Still open</string>
+    <string name="history_legend_planned">Planned</string>
+    <string name="history_cell_desc">%1$s, %2$s</string>
+</resources>

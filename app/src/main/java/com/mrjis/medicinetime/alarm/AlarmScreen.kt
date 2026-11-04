@@ -42,10 +42,12 @@ import com.mrjis.medicinetime.util.formatTime
 /**
  * The ringing alarm screen: large, high contrast, minimal.
  * Every medicine starts ticked. Untick one the person did not take, then press Taken.
+ * [snoozeOptions] come from Settings (1 to 4 values, in minutes).
  */
 @Composable
 fun AlarmScreen(
     group: RingGroup,
+    snoozeOptions: List<Int>,
     onTaken: (List<String>) -> Unit,
     onSnooze: (Int) -> Unit,
     modifier: Modifier = Modifier
@@ -132,19 +134,26 @@ fun AlarmScreen(
                 color = MaterialTheme.colorScheme.onBackground
             )
             Spacer(Modifier.height(8.dp))
-            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                AlarmDefaults.SNOOZE_OPTIONS_MINUTES.forEach { minutes ->
-                    OutlinedButton(
-                        onClick = {
-                            busy = true
-                            onSnooze(minutes)
-                        },
-                        enabled = !busy,
-                        modifier = Modifier
-                            .weight(1f)
-                            .height(56.dp)
-                    ) {
-                        Text(text = snoozeLabel(minutes), style = MaterialTheme.typography.labelLarge)
+
+            // Up to 3 buttons fit on one line; 4 are shown as 2 + 2 so the labels stay readable.
+            val perRow = if (snoozeOptions.size >= 4) 2 else snoozeOptions.size.coerceAtLeast(1)
+            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                snoozeOptions.chunked(perRow).forEach { rowOptions ->
+                    Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                        rowOptions.forEach { minutes ->
+                            OutlinedButton(
+                                onClick = {
+                                    busy = true
+                                    onSnooze(minutes)
+                                },
+                                enabled = !busy,
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .height(56.dp)
+                            ) {
+                                Text(text = snoozeLabel(minutes), style = MaterialTheme.typography.labelLarge)
+                            }
+                        }
                     }
                 }
             }

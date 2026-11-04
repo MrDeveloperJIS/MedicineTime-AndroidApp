@@ -23,7 +23,10 @@ class DoseActionReceiver : BroadcastReceiver() {
                 if (action == ACTION_TAKEN) {
                     container.doseActions.taken(profileId, logIds)
                 } else {
-                    val minutes = intent.getIntExtra(EXTRA_SNOOZE_MINUTES, AlarmDefaults.DEFAULT_SNOOZE_MINUTES)
+                    val minutes = intent.getIntExtra(
+                        EXTRA_SNOOZE_MINUTES,
+                        container.settingsStore.defaultSnoozeMinutes
+                    )
                     container.doseActions.snooze(profileId, logIds, minutes)
                 }
             } catch (e: Exception) {

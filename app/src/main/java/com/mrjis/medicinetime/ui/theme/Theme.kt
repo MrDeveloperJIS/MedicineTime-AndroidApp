@@ -1,15 +1,25 @@
 package com.mrjis.medicinetime.ui.theme
 
+import android.graphics.Color as AndroidColor
+import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
+import androidx.activity.compose.LocalActivity
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
+import com.mrjis.medicinetime.data.prefs.SettingsStore
+import com.mrjis.medicinetime.data.prefs.ThemeMode
 
 private val LightColorScheme = lightColorScheme(
     primary = LightPrimary,
@@ -91,4 +101,43 @@ fun MedicineTimeTheme(
             content = content
         )
     }
+}
+
+/** Resolves System / Light / Dark into a plain dark-or-not answer. */
+@Composable
+fun ThemeMode.isDark(): Boolean = when (this) {
+    ThemeMode.SYSTEM -> isSystemInDarkTheme()
+    ThemeMode.LIGHT -> false
+    ThemeMode.DARK -> true
+}
+
+/** Keeps the status and navigation bar icons readable when the app theme differs from the system theme. */
+@Composable
+fun SystemBarsEffect(darkTheme: Boolean) {
+    val activity = LocalActivity.current as? ComponentActivity ?: return
+    DisposableEffect(activity, darkTheme) {
+        activity.enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.auto(
+                AndroidColor.TRANSPARENT,
+                AndroidColor.TRANSPARENT
+            ) { darkTheme },
+            navigationBarStyle = SystemBarStyle.auto(
+                AndroidColor.argb(0xE6, 0xFF, 0xFF, 0xFF),
+                AndroidColor.argb(0x80, 0x1B, 0x1B, 0x1B)
+            ) { darkTheme }
+        )
+        onDispose { }
+    }
+}
+
+/** The app theme following the Light / Dark / System choice from Settings. Used by both activities. */
+@Composable
+fun SettingsTheme(
+    settings: SettingsStore,
+    content: @Composable () -> Unit
+) {
+    val mode by settings.themeMode.collectAsState()
+    val dark = mode.isDark()
+    SystemBarsEffect(dark)
+    MedicineTimeTheme(darkTheme = dark, content = content)
 }

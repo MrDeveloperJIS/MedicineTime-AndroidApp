@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -21,13 +22,18 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import com.mrjis.medicinetime.AppContainer
 import com.mrjis.medicinetime.MedicineTimeApplication
-import com.mrjis.medicinetime.ui.theme.MedicineTimeTheme
+import com.mrjis.medicinetime.ui.theme.SettingsTheme
+import com.mrjis.medicinetime.util.LocaleHelper
 import kotlinx.coroutines.launch
 
 /** Opens over the lock screen when a dose is due. Closes itself once the dose is answered. */
 class AlarmActivity : ComponentActivity() {
 
     private var request by mutableStateOf<AlarmRequest?>(null)
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LocaleHelper.wrap(newBase))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +46,7 @@ class AlarmActivity : ComponentActivity() {
         val container = (application as MedicineTimeApplication).container
 
         setContent {
-            MedicineTimeTheme {
+            SettingsTheme(container.settingsStore) {
                 AlarmRoute(request = request, container = container, onClose = { finish() })
             }
         }
@@ -91,6 +97,8 @@ private fun AlarmRoute(request: AlarmRequest?, container: AppContainer, onClose:
         }
     }
 
+    val snoozeOptions by container.settingsStore.snoozeOptions.collectAsState()
+
     val current = group
     if (current == null) {
         Box(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background))
@@ -99,6 +107,7 @@ private fun AlarmRoute(request: AlarmRequest?, container: AppContainer, onClose:
 
     AlarmScreen(
         group = current,
+        snoozeOptions = snoozeOptions,
         onTaken = { selectedIds ->
             // appScope, so the answer is saved even though this screen closes right away.
             container.appScope.launch { container.doseActions.taken(current.profileId, selectedIds) }

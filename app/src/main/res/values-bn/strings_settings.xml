@@ -1,0 +1,36 @@
+<resources>
+    <string name="settings_section_appearance">চেহারা</string>
+    <string name="settings_section_alarms">অ্যালার্ম</string>
+    <string name="settings_section_general">পরিবার ও রিমাইন্ডার</string>
+    <string name="settings_section_updates">অ্যাপ আপডেট</string>
+
+    <string name="settings_theme">থিম</string>
+    <string name="theme_system">ফোনের সেটিং অনুযায়ী</string>
+    <string name="theme_light">হালকা</string>
+    <string name="theme_dark">গাঢ়</string>
+
+    <string name="settings_language">ভাষা</string>
+    <string name="language_system">ফোনের সেটিং অনুযায়ী</string>
+    <string name="language_english">English</string>
+    <string name="language_bangla">বাংলা</string>
+
+    <string name="settings_ringtone">অ্যালার্মের শব্দ</string>
+    <string name="ringtone_default">ফোনের ডিফল্ট অ্যালার্মের শব্দ</string>
+    <string name="ringtone_custom">নিজের বাছাই করা শব্দ</string>
+    <string name="ringtone_pick_title">অ্যালার্মের শব্দ বাছুন</string>
+
+    <string name="settings_snooze">স্নুজের বিকল্প</string>
+    <string name="snooze_dialog_hint">১ থেকে %1$dটি বিকল্প বাছুন। নোটিফিকেশনের বোতামে সবচেয়ে ছোটটি ব্যবহার হবে।</string>
+    <string name="settings_missed">এত সময় পরে ডোজ মিস ধরা হবে</string>
+
+    <string name="settings_profiles_title">প্রোফাইল ও খাবারের সময়</string>
+    <string name="settings_profiles_hint">নাম, রঙ ও খাবারের সময় বদলান।</string>
+
+    <string name="update_version">সংস্করণ %1$s</string>
+    <string name="update_check">আপডেট আছে কি না দেখুন</string>
+    <string name="update_checking">দেখা হচ্ছে…</string>
+    <string name="update_up_to_date">আপনার কাছে সর্বশেষ সংস্করণ আছে।</string>
+    <string name="update_available">সংস্করণ %1$s পাওয়া যাচ্ছে।</string>
+    <string name="update_download">ডাউনলোড পেজ খুলুন</string>
+    <string name="update_failed">দেখা যায়নি। ইন্টারনেট চালু আছে কি না দেখে আবার চেষ্টা করুন।</string>
+</resources>

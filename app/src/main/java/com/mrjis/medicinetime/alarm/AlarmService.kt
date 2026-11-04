@@ -11,6 +11,7 @@ import android.media.AudioFocusRequest
 import android.media.AudioManager
 import android.media.Ringtone
 import android.media.RingtoneManager
+import android.net.Uri
 import android.os.Build
 import android.os.Handler
 import android.os.IBinder
@@ -25,6 +26,7 @@ import androidx.core.app.ServiceCompat
 import androidx.core.content.ContextCompat
 import com.mrjis.medicinetime.AppContainer
 import com.mrjis.medicinetime.MedicineTimeApplication
+import com.mrjis.medicinetime.util.LocaleHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -58,6 +60,10 @@ class AlarmService : Service() {
         get() = (application as MedicineTimeApplication).container
     private val notificationManager: NotificationManager
         get() = getSystemService(NotificationManager::class.java)
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LocaleHelper.wrap(newBase))
+    }
 
     override fun onBind(intent: Intent?): IBinder? = null
 
@@ -218,14 +224,34 @@ class AlarmService : Service() {
         getSystemService(AudioManager::class.java).requestAudioFocus(request)
         focusRequest = request
 
-        // System default alarm sound. A ringtone setting arrives in M6.
-        val uri = RingtoneManager.getActualDefaultRingtoneUri(this, RingtoneManager.TYPE_ALARM)
+        // The sound chosen in Settings. If it cannot play (file gone, no access), fall back to the
+        // system default alarm sound so the alarm is never silent.
+        val chosen = container.settingsStore.ringtoneUri.value?.let { runCatching { Uri.parse(it) }.getOrNull() }
+        ringtone = playRingtone(chosen, attributes, mustBePlaying = true)
+            ?: playRingtone(defaultAlarmUri(), attributes, mustBePlaying = false)
+    }
+
+    private fun defaultAlarmUri(): Uri? =
+        RingtoneManager.getActualDefaultRingtoneUri(this, RingtoneManager.TYPE_ALARM)
             ?: RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
             ?: RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE)
-        ringtone = RingtoneManager.getRingtone(this, uri)?.apply {
-            audioAttributes = attributes
-            isLooping = true
-            play()
+
+    private fun playRingtone(uri: Uri?, attributes: AudioAttributes, mustBePlaying: Boolean): Ringtone? {
+        if (uri == null) return null
+        return try {
+            val sound = RingtoneManager.getRingtone(this, uri) ?: return null
+            sound.audioAttributes = attributes
+            sound.isLooping = true
+            sound.play()
+            if (mustBePlaying && !sound.isPlaying) {
+                sound.stop()
+                null
+            } else {
+                sound
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Could not play the alarm sound", e)
+            null
         }
     }
 

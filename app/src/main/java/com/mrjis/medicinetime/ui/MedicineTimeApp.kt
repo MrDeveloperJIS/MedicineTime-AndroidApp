@@ -146,8 +146,7 @@ private fun MainContent(
                 TodayScreen(
                     currentProfile = current,
                     profiles = profiles,
-                    onSelectProfile = profilesViewModel::select,
-                    onManageProfiles = { navController.navigate(Routes.PROFILES) }
+                    onSelectProfile = profilesViewModel::select
                 )
             }
 
@@ -156,16 +155,24 @@ private fun MainContent(
                     currentProfile = current,
                     profiles = profiles,
                     onSelectProfile = profilesViewModel::select,
-                    onManageProfiles = { navController.navigate(Routes.PROFILES) },
                     onAddMedicine = { navController.navigate(Routes.medicineEdit()) },
                     onOpenMedicine = { id -> navController.navigate(Routes.medicineEdit(id)) }
                 )
             }
 
-            composable(Screen.History.route) { HistoryScreen() }
+            composable(Screen.History.route) {
+                HistoryScreen(
+                    currentProfile = current,
+                    profiles = profiles,
+                    onSelectProfile = profilesViewModel::select
+                )
+            }
 
             composable(Screen.Settings.route) {
-                SettingsScreen(onOpenSetup = { navController.navigate(Routes.SETUP) })
+                SettingsScreen(
+                    onOpenSetup = { navController.navigate(Routes.SETUP) },
+                    onOpenProfiles = { navController.navigate(Routes.PROFILES) }
+                )
             }
 
             composable(Routes.SETUP) {

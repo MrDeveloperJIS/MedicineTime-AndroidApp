@@ -17,10 +17,14 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.pluralStringResource
@@ -34,26 +38,34 @@ import com.mrjis.medicinetime.data.local.entity.MedicineWithSchedule
 import com.mrjis.medicinetime.data.local.entity.ProfileEntity
 import com.mrjis.medicinetime.domain.model.RepeatType
 import com.mrjis.medicinetime.domain.model.ScheduleMode
-import com.mrjis.medicinetime.domain.model.StockUnit
+import com.mrjis.medicinetime.domain.stock.StockCalculator
+import com.mrjis.medicinetime.domain.stock.StockInfo
+import com.mrjis.medicinetime.domain.stock.StockLevel
 import com.mrjis.medicinetime.ui.AppViewModelProvider
 import com.mrjis.medicinetime.ui.components.ProfileSwitcher
 import com.mrjis.medicinetime.ui.components.labelRes
 import com.mrjis.medicinetime.ui.medicines.MedicinesViewModel
-import com.mrjis.medicinetime.util.formatAmount
+import com.mrjis.medicinetime.ui.medicines.RefillDialog
+import com.mrjis.medicinetime.ui.medicines.StockBadge
+import com.mrjis.medicinetime.ui.medicines.stockAmountText
+import com.mrjis.medicinetime.ui.medicines.stockForecastText
 
 @Composable
 fun MedicinesScreen(
     currentProfile: ProfileEntity?,
     profiles: List<ProfileEntity>,
     onSelectProfile: (String) -> Unit,
-    onManageProfiles: () -> Unit,
     onAddMedicine: () -> Unit,
     onOpenMedicine: (String) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: MedicinesViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
     val medicines by viewModel.medicines.collectAsState()
+    val stock by viewModel.stock.collectAsState()
     val list = medicines
+
+    // Id of the medicine whose "I bought more" dialog is open.
+    var refillId by remember { mutableStateOf<String?>(null) }
 
     Column(
         modifier = modifier
@@ -70,8 +82,7 @@ fun MedicinesScreen(
                 ProfileSwitcher(
                     current = currentProfile,
                     profiles = profiles,
-                    onSelect = onSelectProfile,
-                    onManage = onManageProfiles
+                    onSelect = onSelectProfile
                 )
             }
             Spacer(modifier = Modifier.weight(1f))
@@ -101,10 +112,32 @@ fun MedicinesScreen(
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 items(list, key = { it.medicine.id }) { item ->
-                    MedicineCard(item = item, onClick = { onOpenMedicine(item.medicine.id) })
+                    MedicineCard(
+                        item = item,
+                        info = stock[item.medicine.id],
+                        onClick = { onOpenMedicine(item.medicine.id) },
+                        onRefill = { refillId = item.medicine.id }
+                    )
                 }
             }
         }
+    }
+
+    val refillItem = refillId?.let { id -> list?.firstOrNull { it.medicine.id == id } }
+    if (refillItem != null) {
+        val m = refillItem.medicine
+        RefillDialog(
+            medicineName = m.name,
+            doseUnit = m.doseUnit,
+            stockUnit = m.stockUnit,
+            current = stock[m.id]?.current
+                ?: if (StockCalculator.isTracked(m)) m.stockBaseline else 0.0,
+            onConfirm = { amount ->
+                viewModel.refill(m.id, amount)
+                refillId = null
+            },
+            onDismiss = { refillId = null }
+        )
     }
 }
 
@@ -134,9 +167,14 @@ private fun EmptyState() {
 }
 
 @Composable
-private fun MedicineCard(item: MedicineWithSchedule, onClick: () -> Unit) {
+private fun MedicineCard(
+    item: MedicineWithSchedule,
+    info: StockInfo?,
+    onClick: () -> Unit,
+    onRefill: () -> Unit
+) {
     val medicine = item.medicine
-    val stockSuffix = if (medicine.stockUnit == StockUnit.ML) " ml" else ""
+    val tracked = StockCalculator.isTracked(medicine)
 
     Card(
         modifier = Modifier
@@ -150,25 +188,105 @@ private fun MedicineCard(item: MedicineWithSchedule, onClick: () -> Unit) {
                 .fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
-            Text(
-                text = medicine.name,
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.SemiBold,
-                color = MaterialTheme.colorScheme.onSurface
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Text(
+                    text = medicine.name,
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier.weight(1f)
+                )
+                if (tracked && info != null) {
+                    StockBadge(info = info)
+                }
+            }
             Text(
                 text = stringResource(medicine.form.labelRes()) + " · " + scheduleSummary(item),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
-            Text(
-                text = stringResource(
-                    R.string.stock_left,
-                    formatAmount(medicine.stockBaseline) + stockSuffix
-                ),
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
+
+            when {
+                !tracked -> Text(
+                    text = stringResource(R.string.stock_not_tracked),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+
+                // Tracked, but the live numbers are still loading.
+                info == null -> Unit
+
+                medicine.scheduleMode == ScheduleMode.AS_NEEDED -> {
+                    Text(
+                        text = stringResource(
+                            R.string.stock_as_needed_left,
+                            stockAmountText(info.current, medicine.doseUnit, medicine.stockUnit)
+                        ),
+                        style = MaterialTheme.typography.bodyLarge,
+                        fontWeight = FontWeight.Medium,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                    val low = medicine.lowStockLevel?.takeIf { it > 0.0 }
+                    if (low != null) {
+                        Text(
+                            text = stringResource(
+                                R.string.stock_warn_at,
+                                stockAmountText(low, medicine.doseUnit, medicine.stockUnit)
+                            ),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                }
+
+                else -> {
+                    Text(
+                        text = stringResource(
+                            R.string.stock_left,
+                            stockAmountText(info.current, medicine.doseUnit, medicine.stockUnit)
+                        ),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    val forecast = stockForecastText(info)
+                    if (forecast != null) {
+                        Text(
+                            text = forecast,
+                            style = MaterialTheme.typography.bodyLarge,
+                            fontWeight = FontWeight.Medium,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
+                }
+            }
+
+            // Filled button when stock is low, so it stands out. Outlined otherwise.
+            val needsRefill = info != null && info.level != StockLevel.OK
+            if (needsRefill) {
+                Button(
+                    onClick = onRefill,
+                    modifier = Modifier
+                        .padding(top = 8.dp)
+                        .fillMaxWidth()
+                        .heightIn(min = 48.dp)
+                ) {
+                    Text(stringResource(R.string.refill_button))
+                }
+            } else {
+                OutlinedButton(
+                    onClick = onRefill,
+                    modifier = Modifier
+                        .padding(top = 8.dp)
+                        .fillMaxWidth()
+                        .heightIn(min = 48.dp)
+                ) {
+                    Text(stringResource(R.string.refill_button))
+                }
+            }
         }
     }
 }

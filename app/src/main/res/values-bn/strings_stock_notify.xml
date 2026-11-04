@@ -1,0 +1,26 @@
+<resources>
+    <!-- Stock warning notifications -->
+    <string name="stock_channel_name">মজুত সতর্কতা</string>
+    <string name="stock_channel_description">কোনো ওষুধ শেষ হয়ে এলে জানায়।</string>
+
+    <!-- Shown under the app name, so you know whose medicine it is -->
+    <string name="stock_notif_for_profile">%1$s-এর জন্য</string>
+
+    <!-- Titles (%1$s = medicine name) -->
+    <string name="stock_notif_title_low">%1$s কমে আসছে</string>
+    <string name="stock_notif_title_today">%1$s আজই শেষ হবে</string>
+    <string name="stock_notif_title_not_enough">%1$s: পরের ডোজের জন্য যথেষ্ট নেই</string>
+    <string name="stock_notif_title_out">%1$s শেষ হয়ে গেছে</string>
+
+    <!-- Texts. %1$d = days left, %2$s = amount in stock -->
+    <plurals name="stock_notif_text_days">
+        <item quantity="one">%1$d দিন বাকি। মজুত আছে %2$s। শিগগির আরও কিনুন।</item>
+        <item quantity="other">%1$d দিন বাকি। মজুত আছে %2$s। শিগগির আরও কিনুন।</item>
+    </plurals>
+
+    <!-- %1$s = amount in stock -->
+    <string name="stock_notif_text_today">আজ শেষ ডোজের পর মজুত থাকবে না। এখন আছে %1$s। আজই আরও কিনুন।</string>
+    <string name="stock_notif_text_not_enough">এখন আছে %1$s, যা পরের ডোজের জন্য যথেষ্ট নয়। এখনই আরও কিনুন।</string>
+    <string name="stock_notif_text_as_needed_low">%1$s বাকি আছে। শিগগির আরও কিনুন।</string>
+    <string name="stock_notif_text_as_needed_out">আর নেই। আরও কিনুন।</string>
+</resources>

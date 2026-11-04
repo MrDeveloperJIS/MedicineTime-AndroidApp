@@ -62,7 +62,9 @@ class MedicineEditViewModel(
                     _finished.value = true
                 } else {
                     existing = item.medicine
-                    _draft.value = item.toDraft()
+                    // The form shows the stock the person has now, not the number first typed in.
+                    val current = container.stockRepository.currentStock(medicineId)
+                    _draft.value = item.toDraft(currentStock = current)
                     _loaded.value = true
                 }
             }

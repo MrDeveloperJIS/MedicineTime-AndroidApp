@@ -74,7 +74,6 @@ fun TodayScreen(
     currentProfile: ProfileEntity?,
     profiles: List<ProfileEntity>,
     onSelectProfile: (String) -> Unit,
-    onManageProfiles: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: TodayViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
@@ -131,8 +130,7 @@ fun TodayScreen(
                     ProfileSwitcher(
                         current = currentProfile,
                         profiles = profiles,
-                        onSelect = onSelectProfile,
-                        onManage = onManageProfiles
+                        onSelect = onSelectProfile
                     )
                 }
             }

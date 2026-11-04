@@ -60,6 +60,12 @@ data class MedicineDraft(
     /** AS_NEEDED only. */
     val defaultDose: String = "",
     val stock: String = "",
+    /**
+     * Editing only: the stock text the form opened with (the CURRENT stock, not the baseline).
+     * If [stock] still equals it on save, the stock baseline is left alone so that
+     * refill warnings are not reset by an unrelated edit. null when adding a new medicine.
+     */
+    val loadedStock: String? = null,
     /** AS_NEEDED only. */
     val lowStockLevel: String = "",
     val notes: String = "",
@@ -257,7 +263,11 @@ private fun SlotDraft.duplicateKey(): String =
 // Conversion: draft <-> database entities
 // ---------------------------------------------------------------------------------------------
 
-fun MedicineWithSchedule.toDraft(): MedicineDraft {
+/**
+ * [currentStock] is the stock right now (baseline minus doses taken since). The form shows that
+ * number, so what the user sees is what they have in hand. Falls back to the baseline if unknown.
+ */
+fun MedicineWithSchedule.toDraft(currentStock: Double? = null): MedicineDraft {
     val m = medicine
     val phaseDrafts = phases.map { item ->
         val p = item.phase
@@ -280,13 +290,15 @@ fun MedicineWithSchedule.toDraft(): MedicineDraft {
             }
         )
     }
+    val stockText = formatAmount(currentStock ?: m.stockBaseline)
     return MedicineDraft(
         name = m.name,
         form = m.form,
         doseUnit = m.doseUnit,
         scheduleMode = m.scheduleMode,
         defaultDose = m.defaultDose?.let { formatAmount(it) } ?: "",
-        stock = formatAmount(m.stockBaseline),
+        stock = stockText,
+        loadedStock = stockText,
         lowStockLevel = m.lowStockLevel?.let { formatAmount(it) } ?: "",
         notes = m.notes,
         phases = phaseDrafts.ifEmpty { listOf(newFirstPhase()) }
@@ -306,9 +318,14 @@ fun MedicineDraft.toEntities(
     val isAsNeeded = scheduleMode == ScheduleMode.AS_NEEDED
     val newStock = parseAmount(stock) ?: 0.0
     val newStockUnit = stockUnit
-    val stockChanged = existing == null ||
-            existing.stockBaseline != newStock ||
-            existing.stockUnit != newStockUnit
+
+    val stockChanged = when {
+        existing == null -> true
+        existing.stockUnit != newStockUnit -> true
+        // The form opened with the current stock: changed only if the user typed another number.
+        loadedStock != null -> (parseAmount(loadedStock) ?: 0.0) != newStock
+        else -> existing.stockBaseline != newStock
+    }
 
     val medicine = MedicineEntity(
         id = medicineId,

@@ -1,0 +1,48 @@
+<resources>
+    <!-- Stock amounts -->
+    <string name="stock_amount_ml">%1$s ml</string>
+    <plurals name="stock_count_tablet">
+        <item quantity="one">%1$s tablet</item>
+        <item quantity="other">%1$s tablets</item>
+    </plurals>
+    <plurals name="stock_count_drop">
+        <item quantity="one">%1$s drop</item>
+        <item quantity="other">%1$s drops</item>
+    </plurals>
+    <plurals name="stock_count_unit">
+        <item quantity="one">%1$s unit</item>
+        <item quantity="other">%1$s units</item>
+    </plurals>
+
+    <!-- Medicines list -->
+    <string name="stock_not_tracked">Stock not tracked</string>
+    <string name="stock_as_needed_left">%1$s left</string>
+    <string name="stock_warn_at">Warns at %1$s</string>
+    <string name="stock_out">Out of stock</string>
+    <string name="stock_lasts_course">Enough for the whole course</string>
+    <string name="stock_not_enough">Not enough for the next dose</string>
+    <string name="stock_runs_out_today">Runs out today</string>
+    <plurals name="stock_days_left">
+        <item quantity="one">%d day left</item>
+        <item quantity="other">%d days left</item>
+    </plurals>
+
+    <!-- Badge -->
+    <string name="stock_badge_ok">OK</string>
+    <string name="stock_badge_low">Low</string>
+    <string name="stock_badge_very_low">Very low</string>
+    <string name="stock_badge_out">Out</string>
+
+    <!-- I bought more -->
+    <string name="refill_button">I bought more</string>
+    <string name="refill_title">I bought more</string>
+    <string name="refill_message">How much did you buy for %1$s?</string>
+    <string name="refill_current">In stock now: %1$s</string>
+    <string name="refill_amount_label">Amount bought</string>
+    <string name="refill_new_total">New total: %1$s</string>
+    <string name="refill_confirm">Add to stock</string>
+    <string name="refill_invalid">Enter a number above 0.</string>
+
+    <!-- Edit form -->
+    <string name="stock_edit_hint">This is the amount you have now. Changing it replaces your count. To add a new purchase, use I bought more on the Medicines list.</string>
+</resources>

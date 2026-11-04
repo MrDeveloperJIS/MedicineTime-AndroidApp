@@ -1,0 +1,48 @@
+<resources>
+    <!-- Stock amounts -->
+    <string name="stock_amount_ml">%1$s মিলি</string>
+    <plurals name="stock_count_tablet">
+        <item quantity="one">%1$s টি ট্যাবলেট</item>
+        <item quantity="other">%1$s টি ট্যাবলেট</item>
+    </plurals>
+    <plurals name="stock_count_drop">
+        <item quantity="one">%1$s ফোঁটা</item>
+        <item quantity="other">%1$s ফোঁটা</item>
+    </plurals>
+    <plurals name="stock_count_unit">
+        <item quantity="one">%1$s ইউনিট</item>
+        <item quantity="other">%1$s ইউনিট</item>
+    </plurals>
+
+    <!-- Medicines list -->
+    <string name="stock_not_tracked">মজুত গোনা হচ্ছে না</string>
+    <string name="stock_as_needed_left">%1$s বাকি</string>
+    <string name="stock_warn_at">%1$s-এ নামলে জানাবে</string>
+    <string name="stock_out">মজুত শেষ</string>
+    <string name="stock_lasts_course">পুরো কোর্সের জন্য যথেষ্ট</string>
+    <string name="stock_not_enough">পরের ডোজের জন্য যথেষ্ট নেই</string>
+    <string name="stock_runs_out_today">আজই শেষ হবে</string>
+    <plurals name="stock_days_left">
+        <item quantity="one">%d দিন বাকি</item>
+        <item quantity="other">%d দিন বাকি</item>
+    </plurals>
+
+    <!-- Badge -->
+    <string name="stock_badge_ok">ঠিক আছে</string>
+    <string name="stock_badge_low">কম</string>
+    <string name="stock_badge_very_low">খুব কম</string>
+    <string name="stock_badge_out">শেষ</string>
+
+    <!-- I bought more -->
+    <string name="refill_button">আরও কিনেছি</string>
+    <string name="refill_title">আরও কিনেছি</string>
+    <string name="refill_message">%1$s কতটা কিনেছেন?</string>
+    <string name="refill_current">এখন মজুত: %1$s</string>
+    <string name="refill_amount_label">কেনা পরিমাণ</string>
+    <string name="refill_new_total">নতুন মোট: %1$s</string>
+    <string name="refill_confirm">মজুতে যোগ করুন</string>
+    <string name="refill_invalid">০-এর চেয়ে বেশি সংখ্যা লিখুন।</string>
+
+    <!-- Edit form -->
+    <string name="stock_edit_hint">এটি এখন আপনার কাছে থাকা পরিমাণ। এটি বদলালে আপনার হিসাব নতুন করে শুরু হবে। নতুন কেনা ওষুধ যোগ করতে ওষুধ তালিকায় আরও কিনেছি বোতাম ব্যবহার করুন।</string>
+</resources>

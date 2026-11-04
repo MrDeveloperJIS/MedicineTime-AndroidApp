@@ -18,7 +18,6 @@
 
     <!-- Profiles -->
     <string name="profiles_title">Profiles</string>
-    <string name="manage_profiles">Manage profiles</string>
     <string name="add_profile">Add profile</string>
     <string name="edit_profile">Edit profile</string>
     <string name="current_profile">Current</string>
